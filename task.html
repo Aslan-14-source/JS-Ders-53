@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form və LocalStorage</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            gap: 10px;
+        }
+
+        input,
+        button {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Məlumat Formu</h2>
+    <form id="userForm">
+        <input type="text" name="name" placeholder="Adınızı daxil edin" required />
+        <input type="email" name="email" placeholder="Emailinizi daxil edin" required />
+        <button type="submit">Göndər</button>
+    </form>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = e.target.name.value.trim();
+            const email = e.target.email.value.trim();
+
+            const userData = {
+                name,
+                email,
+                timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem("userData", JSON.stringify(userData));
+
+            alert("Məlumat uğurla yadda saxlanıldı!");
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>
